@@ -1,0 +1,38 @@
+				
+				READ ME
+
+----------------------------------------------------------------------
+Go through the following steps in case of any issue:
+
+1. Make sure your system has django install. Ti check run the following command on Command Prompt(cmd):
+	
+	> $ django-admin --version
+
+This command will display the django-admin version if installed or else will notify that django is not installed.
+
+2. To install django run the following pip command on Command Prompt(cmd)
+
+	>$ pip install django
+
+3. After installing redirect the cmd to "assignment\project" using the "cd" command of cmd
+
+4. Run the server using the cmd command: >$ python manage.py runserver
+
+5. To create the database use the following commands:
+	
+	>$ python manage.py makemigrations app
+	>$ python manage.py migrate
+	
+6. To access the database using the admin use the following steps:
+
+	i)Create a superuser:
+
+		>python manage.py createsuperuser
+		>Enter any user name
+		>Enter an email
+		>Set the password
+		>Confirm the password
+
+	ii) To access the admin panel go to the bowser and enter 'localhost:8000/admin'
+	
+	iii) Login using the username and password

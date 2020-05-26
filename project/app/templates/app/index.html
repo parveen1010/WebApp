@@ -1,0 +1,82 @@
+
+{% extends "app/layout.html" %}
+
+
+{% block content %}	
+
+<br>
+  <div class="absolute">
+    <div class="dropdown">
+      <form method="POST" action="{% url 'home'%}">
+        {% csrf_token %}
+        <input list="sort" name="sort" size=10>
+        <div class="dropdown-content">
+            <datalist id="sort">
+              <option value="Name">
+              <option value="PAN Number">
+              <option value="City">
+            </datalist>
+        </div>
+         <input type="Submit" value="Sort By">
+      </form>
+    </div>
+  </div>
+<br><br><br>
+<div class="col-md-12">
+  <h3>List of Register Users</h1>
+  <hr>
+  <div class="card card-body">
+   
+   <table class="table table-sm">
+    <tr>
+     <th>Name</th>
+     <th>PAN Number</th>
+     <th>Age</th>
+     <th>Gender</th>
+     <th>Email</th>
+     <th>City</th>
+     <th>Action</th>
+    </tr>
+    
+    {% for user in posts.object_list %}
+    
+      <tr>
+        <td> {{user.name}}</td>
+     <td> {{user.pan}}</td>
+     <td> {{user.age}}</td>
+     <td>{{user.gender}}</td>
+     <td> {{user.email}}</td>
+     <td> {{user.city}}</td>
+     <td><a class="btn btn-sm btn-info" href="{% url 'update_user' user.id %}">Edit</a>
+      <a class="btn btn-sm btn-danger" href="{% url 'delete_user' user.id %}">Delete</a></td>
+      </tr>
+ 	{% endfor %}
+      
+ 
+   </table>
+  </div>
+ </div>
+<br><br>
+</div>
+  <div class="pagination">
+      <ul id="menu">
+      {% if posts.has_previous %}
+        <li ><a href="?page={{posts.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% for pg in posts.paginator.page_range %}
+          {% if posts.number == pg %}
+            <li class="active"><a href="?page={{pg}}">{{pg}}</a></li>
+            {% else %}
+            <li><a href="?page={{pg}}">{{pg}}</a></li>
+          {% endif %}
+        {% endfor %}
+
+       {% if posts.has_next %}
+        <li><a href="?page={{posts.next_page_number }}">Next</a></li>
+         {% endif %}
+</ul>
+</div>
+
+
+{% endblock %}

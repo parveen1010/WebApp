@@ -1,0 +1,63 @@
+
+{% extends "app/layout.html" %}
+
+
+{% block content %}	
+<div class="row">
+  <div class="col">
+    <div class="card card-body"> 
+    <div class="row">
+      <div class='col-sm-6 col-sm-offset-3'>
+        
+                {% for message in messages %}
+                 <p {% if message.tags == "success" %} class="alert alert-success" {% else %} class= "alert alert-danger"{% endif %}>{{ message }}</p>
+
+            {% endfor %}
+      </div>
+    </div>
+      <form name="search_form_results" action='{% url "search" %}' method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name or City or PAN Number" size=100>
+    
+   
+        <input class="btn btn-primary" type="submit" value="Search">
+      </form>
+    </div>
+  </div>
+  
+</div>
+
+ <div class="col-md-12">
+  <h4>Search Results</h4>
+  <hr>
+  <div class="card card-body">
+   
+   <table class="table table-sm">
+    <tr>
+     <th>Name</th>
+     <th>PAN Number</th>
+     <th>Age</th>
+     <th>Gender</th>
+     <th>Email</th>
+     <th>City</th>
+     <th>Action</th>
+    </tr>
+    
+    {% for user in customer %}
+    
+      <tr>
+        <td> {{user.name}}</td>
+     <td> {{user.pan}}</td>
+     <td> {{user.age}}</td>
+     <td>{{user.gender}}</td>
+     <td> {{user.email}}</td>
+     <td> {{user.city}}</td>
+     <td><a class="btn btn-sm btn-info" href="{% url 'update_user' user.id %}">Edit</a>
+      <a class="btn btn-sm btn-danger" href="{% url 'delete_user' user.id %}">Delete</a></td>
+      </tr>
+  {% endfor %}
+
+
+
+
+{% endblock %}

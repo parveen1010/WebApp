@@ -1,0 +1,41 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="space">
+<div class="row">
+	<div class="col-md-14">
+		<div class="card card-body">
+			<h4> Hello {{user.name}}, </h4>
+			<h4>Please enter the updated Email and City</h4>
+			<br>
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{ form.management_form }}
+				<label>Email:</label><br>
+				{{form.email}}<br><br>
+				
+				<input type="text" name="city" placeholder="City" name="city" list="datalist1"/>
+	 	 	<datalist id="datalist1">
+	 	 			<option value="Mumbai">
+					<option value="Delhi">
+					<option value="Bangalore">
+					<option value="Hyderabad">
+					<option value="Ahmedabad">
+					<option value="Chennai">
+					<option value="Kolkata">
+					<option value="Surat">
+					<option value="Pune">
+	 	 			<option value="Lucknow">
+					<option value="Jaipur">
+					<option value="Indore">
+	 	 	</datalist>
+				<br><br>
+				<input type="submit" class="btn btn-sm btn-info" name="Update">
+			</form>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

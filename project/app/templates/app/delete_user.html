@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+
+<br>
+<div class="space">
+<div class="row">
+
+		<div class="card card-body">
+
+
+			<p>Are you sure you want to delete "{{user}}"?</p><br>
+			
+			<form action="{% url 'delete_user' user.id  %}" method="POST">
+				
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+			
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

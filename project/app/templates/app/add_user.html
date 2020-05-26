@@ -1,0 +1,80 @@
+{% extends "app/layout.html" %}
+
+
+{% block content %}	
+
+<script>
+function generateReportA(){
+   document.forms['search_form_results'].action = '{% url "home" %}';
+   document.forms['search_form_results'].submit();
+}
+</script>
+
+		
+
+		
+	<div class="card card-body">	
+		<div class="row">
+			<div class='col-sm-6 col-sm-offset-3'>
+				
+			  			  {% for message in messages %}
+			   				 <p {% if message.tags == "success" %} class="alert alert-success" {% else %} class= "alert alert-danger"{% endif %}>{{ message }}</p>
+
+			 			{% endfor %}
+			</div>
+		</div>
+		<br><br>
+	<h2>Enter the details</h2>
+</div>
+<br>
+	<span class="space">
+	<form name="search_form_results" action='{% url "add_user" %}' method="POST">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="Full Name">
+		
+		<span class="tab">
+			<input type="text" name="pan" placeholder="PAN Number">
+		</span>
+
+		<br><br>
+
+		<input type="text" name="age" placeholder="Age">
+
+		<span class="tab">
+			 <input list="gender" placeholder="Gender" name="gender">
+				  	<datalist id="gender">
+					    <option value="Male">
+					    <option value="Female">
+					    <option value="Others">
+		  			</datalist>
+	 	 </span>
+	 	 <br><br>
+
+	 	 <input type="email" name="email" placeholder="Email" size=63>
+	 	 <br><br>
+
+	 	 <input type="text" name="city" placeholder="City" name="city" list="datalist1"/>
+	 	 	<datalist id="datalist1">
+	 	 			<option value="Mumbai">
+					<option value="Delhi">
+					<option value="Bangalore">
+					<option value="Hyderabad">
+					<option value="Ahmedabad">
+					<option value="Chennai">
+					<option value="Kolkata">
+					<option value="Surat">
+					<option value="Pune">
+	 	 			<option value="Lucknow">
+					<option value="Jaipur">
+					<option value="Indore">
+	 	 	</datalist>
+	 	 	<br><br>
+	 	<div class="absolute">
+	 	 <input type="submit" class="btn btn-primary" name="submit_report"  value="Add"/>
+	     <input type="button" name="submit_reportA" class="btn btn-secondary" value="Cancel"  onclick="generateReportA();" />
+		</div>
+		</form>
+	 	</span>
+</div>
+
+{% endblock %}
